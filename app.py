@@ -198,6 +198,18 @@ div[data-testid="metric-container"] {
 """, unsafe_allow_html=True)
 
 
+# -------------------------------------------------------
+# Sidebar — menu de navegacion
+# -------------------------------------------------------
+
+with st.sidebar:
+    st.title("Bank Marketing EDA")
+    st.markdown("Analisis Exploratorio de Datos")
+    st.markdown("---")
+    modulo = st.radio(
+        "Ir a:",
+        ["Home", "Cargar Dataset", "Analisis EDA", "Conclusiones"]
+    )
 
 
 # -------------------------------------------------------
@@ -207,7 +219,7 @@ div[data-testid="metric-container"] {
 if modulo == "Home":
 
     st.title("Bank Marketing — Analisis Exploratorio de Datos")
-    st.markdown("##### Caso de Estudio N°1 | Especializacion en Python for Analytics")
+    st.markdown("Caso de Estudio N°1 | Especializacion en Python for Analytics")
     st.divider()
 
     col1, col2 = st.columns([2, 1])
@@ -215,24 +227,28 @@ if modulo == "Home":
     with col1:
         st.markdown("### Objetivo del Analisis")
         st.markdown("""
-Una institucion financiera ha experimentado una caida en la efectividad de sus campanas 
-de marketing directo, pasando del 12% al 8% en los ultimos seis meses. 
+Una institucion financiera ha experimentado una caida en la efectividad de sus campanas
+de marketing directo, pasando del 12% al 8% en los ultimos seis meses.
 Esta situacion ha afectado el cumplimiento de metas de los ejecutivos comerciales.
 
-El presente proyecto aplica un Analisis Exploratorio de Datos (EDA) sobre el dataset 
-`BankMarketing.csv` para identificar los factores que influyen en la aceptacion o rechazo 
+El presente proyecto aplica un Analisis Exploratorio de Datos (EDA) sobre el dataset
+`BankMarketing.csv` para identificar los factores que influyen en la aceptacion o rechazo
 de la campana, con el objetivo de generar insights que apoyen la toma de decisiones.
 
-El objetivo **no** es construir modelos predictivos, sino descubrir patrones y relaciones 
+El objetivo **no** es construir modelos predictivos, sino descubrir patrones y relaciones
 relevantes entre las variables disponibles.
         """)
 
-        st.markdown("Alumnor")
+        st.markdown("Alumno")
         st.info("""
 Nombre: Miguel Angel Jimenez Huamani
-Curso: Especializacion en Python for Analytics
         """)
 
+    with col2:
+        st.markdown("Sobre el Dataset")
+        st.markdown("""
+Archivo: BankMarketing.csv
+        """)
     st.divider()
 
     st.markdown("### Descripcion de Variables")
@@ -270,7 +286,7 @@ Curso: Especializacion en Python for Analytics
 elif modulo == "Cargar Dataset":
 
     st.title("Carga del Dataset")
-    st.markdown("Sube el archivo **BankMarketing.csv** para habilitar el analisis.")
+    st.markdown("Sube el archivo BankMarketing.csv para habilitar el analisis.")
 
     archivo = st.file_uploader("Selecciona el archivo .csv", type=["csv"])
 
@@ -336,13 +352,10 @@ elif modulo == "Analisis EDA":
         "10. Hallazgos"
     ])
 
-    # --------------------------------------------------
-    # Item 1 — Informacion general
-    # --------------------------------------------------
     with tab1:
         st.subheader("Item 1: Informacion General del Dataset")
         st.markdown(f"""
-El dataset contiene **{df.shape[0]:,} registros** y **{df.shape[1]} columnas** que describen 
+El dataset contiene {df.shape[0]:,} registros y {df.shape[1]} columnas que describen
 las caracteristicas de clientes y el resultado de una campana de marketing telefonico.
         """)
 
@@ -368,9 +381,6 @@ las caracteristicas de clientes y el resultado de una campana de marketing telef
             resumen_tipo.columns = ["Tipo de Dato", "Cantidad"]
             st.dataframe(resumen_tipo, use_container_width=True, hide_index=True)
 
-    # --------------------------------------------------
-    # Item 2 — Clasificacion de variables
-    # --------------------------------------------------
     with tab2:
         st.subheader("Item 2: Clasificacion de Variables")
 
@@ -392,16 +402,13 @@ las caracteristicas de clientes y el resultado de una campana de marketing telef
         st.markdown("---")
         st.markdown("""
 **Interpretacion:**
-Las variables numericas incluyen indicadores demograficos como la edad, 
+Las variables numericas incluyen indicadores demograficos como la edad,
 variables de campana como la duracion e indicadores macroeconomicos como el euribor y la tasa de empleo.
-Las variables categoricas describen el perfil del cliente (trabajo, educacion, estado civil) 
+Las variables categoricas describen el perfil del cliente (trabajo, educacion, estado civil)
 y los canales y momentos de contacto.
 La variable objetivo **`y`** es categorica binaria y registra si el cliente acepto la campana.
         """)
 
-    # --------------------------------------------------
-    # Item 3 — Estadisticas descriptivas
-    # --------------------------------------------------
     with tab3:
         st.subheader("Item 3: Estadisticas Descriptivas")
 
@@ -448,14 +455,11 @@ La variable objetivo **`y`** es categorica binaria y registra si el cliente acep
             st.pyplot(fig_stat)
 
         st.markdown(f"""
-**Interpretacion:** Para la variable seleccionada, la diferencia entre la media 
-({round(s.mean(), 2)}) y la mediana ({round(s.median(), 2)}) permite identificar 
+**Interpretacion:** Para la variable seleccionada, la diferencia entre la media
+({round(s.mean(), 2)}) y la mediana ({round(s.median(), 2)}) permite identificar
 el grado de asimetria de la distribucion.
         """)
 
-    # --------------------------------------------------
-    # Item 4 — Valores faltantes
-    # --------------------------------------------------
     with tab4:
         st.subheader("Item 4: Analisis de Valores Faltantes")
 
@@ -477,7 +481,7 @@ el grado de asimetria de la distribucion.
         st.markdown("---")
         st.markdown("#### Valores 'unknown' en variables categoricas")
         st.markdown("""
-Aunque no hay nulos explicitos, el dataset contiene la etiqueta **'unknown'** 
+Aunque no hay nulos explicitos, el dataset contiene la etiqueta **'unknown'**
 en varias variables categoricas, que representa informacion no disponible del cliente.
         """)
 
@@ -496,13 +500,10 @@ en varias variables categoricas, que representa informacion no disponible del cl
                 st.pyplot(fig_unk)
 
             st.warning("""
-La variable 'default' presenta el mayor porcentaje de valores desconocidos (20.9%). 
+La variable 'default' presenta el mayor porcentaje de valores desconocidos (20.9%).
 Se recomienda tratar estos valores con la moda o crear una categoria propia en analisis futuros.
             """)
 
-    # --------------------------------------------------
-    # Item 5 — Distribucion de variables numericas
-    # --------------------------------------------------
     with tab5:
         st.subheader("Item 5: Distribucion de Variables Numericas")
 
@@ -520,7 +521,7 @@ Se recomienda tratar estos valores con la moda o crear una categoria propia en a
 **Interpretacion de `{var_num}`:**
 Media = {s_num.mean():.2f} | Mediana = {s_num.median():.2f} | Desviacion = {s_num.std():.2f}
 
-La diferencia entre media y mediana indica el nivel de asimetria de la distribucion. 
+La diferencia entre media y mediana indica el nivel de asimetria de la distribucion.
 Una desviacion estandar alta respecto a la media senala una distribucion muy dispersa.
         """)
 
@@ -539,9 +540,6 @@ Una desviacion estandar alta respecto a la media senala una distribucion muy dis
             plt.tight_layout()
             st.pyplot(fig_all)
 
-    # --------------------------------------------------
-    # Item 6 — Distribucion de variables categoricas
-    # --------------------------------------------------
     with tab6:
         st.subheader("Item 6: Analisis de Variables Categoricas")
 
@@ -564,13 +562,10 @@ Una desviacion estandar alta respecto a la media senala una distribucion muy dis
         fig_tasa = analizador.grafico_tasa_por_grupo(var_cat)
         st.pyplot(fig_tasa)
 
-    # --------------------------------------------------
-    # Item 7 — Bivariado: numerico vs categorico
-    # --------------------------------------------------
     with tab7:
         st.subheader("Item 7: Analisis Bivariado — Numerico vs Categorico")
         st.markdown("""
-Se compara la distribucion de una variable numerica segun los grupos 
+Se compara la distribucion de una variable numerica segun los grupos
 de una variable categorica, para identificar si existen diferencias relevantes entre ellos.
         """)
 
@@ -594,17 +589,14 @@ de una variable categorica, para identificar si existen diferencias relevantes e
         st.dataframe(agrupado, use_container_width=True)
 
         st.info(f"""
-La linea central en el boxplot representa la mediana de `{var_num_biv}` para cada grupo de `{var_cat_biv}`. 
+La linea central en el boxplot representa la mediana de `{var_num_biv}` para cada grupo de `{var_cat_biv}`.
 Los puntos fuera de los bigotes son valores atipicos.
         """)
 
-    # --------------------------------------------------
-    # Item 8 — Bivariado: categorico vs categorico
-    # --------------------------------------------------
     with tab8:
         st.subheader("Item 8: Analisis Bivariado — Categorico vs Categorico")
         st.markdown("""
-Se analiza la relacion entre dos variables categoricas mediante una tabla de contingencia 
+Se analiza la relacion entre dos variables categoricas mediante una tabla de contingencia
 y un grafico de barras apiladas que muestra la proporcion de cada categoria.
         """)
 
@@ -634,13 +626,10 @@ y un grafico de barras apiladas que muestra la proporcion de cada categoria.
             st.markdown("**Tabla de Contingencia — Porcentaje por fila**")
             st.dataframe(ct_pct.round(1), use_container_width=True)
 
-    # --------------------------------------------------
-    # Item 9 — Analisis dinamico con filtros
-    # --------------------------------------------------
     with tab9:
         st.subheader("Item 9: Analisis con Parametros Seleccionados")
         st.markdown("""
-Usa los controles para filtrar el dataset y explorar subgrupos de interes. 
+Usa los controles para filtrar el dataset y explorar subgrupos de interes.
 Los graficos y metricas se actualizan automaticamente.
         """)
 
@@ -658,7 +647,6 @@ Los graficos y metricas se actualizan automaticamente.
                                         default=["age", "duration", "campaign"])
             solo_yes = st.checkbox("Solo clientes que aceptaron (y = yes)")
 
-        # Aplicar filtros
         filtro = (
             df["age"].between(*rango_edad) &
             df["job"].isin(sel_trabajo if sel_trabajo else df["job"].unique()) &
@@ -697,9 +685,6 @@ Los graficos y metricas se actualizan automaticamente.
             st.markdown("**Muestra de datos filtrados**")
             st.dataframe(df_filtrado.head(20), use_container_width=True)
 
-    # --------------------------------------------------
-    # Item 10 — Hallazgos clave
-    # --------------------------------------------------
     with tab10:
         st.subheader("Item 10: Hallazgos Clave del Analisis")
 
@@ -763,7 +748,7 @@ elif modulo == "Conclusiones":
 
     st.title("Conclusiones Finales")
     st.markdown("""
-A partir del analisis exploratorio realizado sobre el dataset BankMarketing.csv, 
+A partir del analisis exploratorio realizado sobre el dataset BankMarketing.csv,
 se presentan cinco conclusiones orientadas a la toma de decisiones estrategicas.
     """)
 
