@@ -198,22 +198,6 @@ div[data-testid="metric-container"] {
 """, unsafe_allow_html=True)
 
 
-# -------------------------------------------------------
-# Sidebar — menu de navegacion
-# -------------------------------------------------------
-
-with st.sidebar:
-    st.title("Bank Marketing EDA")
-    st.markdown("Analisis Exploratorio de Datos")
-    st.markdown("---")
-    modulo = st.radio(
-        "Ir a:",
-        ["Home", "Cargar Dataset", "Analisis EDA", "Conclusiones"]
-    )
-    st.markdown("---")
-    st.markdown("**Tecnologias**")
-    st.markdown("Python · Pandas · Seaborn · Streamlit")
-    st.caption("Especializacion Python for Analytics · 2025")
 
 
 # -------------------------------------------------------
