@@ -232,10 +232,10 @@ if modulo == "Home":
         st.markdown("### Objetivo del Analisis")
         st.markdown("""
 Una institucion financiera ha experimentado una caida en la efectividad de sus campanas 
-de marketing directo, pasando del **12% al 8%** en los ultimos seis meses. 
+de marketing directo, pasando del 12% al 8% en los ultimos seis meses. 
 Esta situacion ha afectado el cumplimiento de metas de los ejecutivos comerciales.
 
-El presente proyecto aplica un **Analisis Exploratorio de Datos (EDA)** sobre el dataset 
+El presente proyecto aplica un Analisis Exploratorio de Datos (EDA) sobre el dataset 
 `BankMarketing.csv` para identificar los factores que influyen en la aceptacion o rechazo 
 de la campana, con el objetivo de generar insights que apoyen la toma de decisiones.
 
@@ -243,31 +243,10 @@ El objetivo **no** es construir modelos predictivos, sino descubrir patrones y r
 relevantes entre las variables disponibles.
         """)
 
-        st.markdown("### Datos del Autor")
+        st.markdown("Alumnor")
         st.info("""
 Nombre: Miguel Angel Jimenez Huamani
-
 Curso: Especializacion en Python for Analytics
-
-        """)
-
-    with col2:
-        st.markdown("### Sobre el Dataset")
-        st.markdown("""
-**Archivo:** BankMarketing.csv
-
-- 41 188 registros
-- 21 variables
-- Variable objetivo: `y` (yes / no)
-- Campanas de marketing telefonico de un banco portugues
-        """)
-
-        st.markdown("### Tecnologias utilizadas")
-        st.markdown("""
-- Python 3.11
-- Pandas y NumPy
-- Matplotlib y Seaborn
-- Streamlit
         """)
 
     st.divider()
